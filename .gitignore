@@ -1,0 +1,47 @@
+# === Секреты и данные ===
+.env
+.env.local
+.env.*.local
+database.db
+database.db-shm
+database.db-wal
+*.sqlite
+*.sqlite3
+
+# === Зависимости ===
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json.bak
+
+# === Бэкапы ===
+*.bak
+*.bak2
+*.bak3
+*.bak_poll
+*.backup
+*.orig
+
+# === Загрузки пользователей ===
+uploads/*
+!uploads/.gitkeep
+public/uploads/*
+!public/uploads/.gitkeep
+
+# === PM2 / логи ===
+.pm2/
+logs/
+*.log
+
+# === ОС и редакторы ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# === Временные ===
+tmp/
+temp/
+.cache/
