@@ -5,6 +5,10 @@
 database.db
 database.db-shm
 database.db-wal
+bot-data.db
+*.db
+*.db-shm
+*.db-wal
 *.sqlite
 *.sqlite3
 
@@ -12,13 +16,14 @@ database.db-wal
 node_modules/
 npm-debug.log*
 yarn-error.log*
-package-lock.json.bak
 
 # === Бэкапы ===
 *.bak
 *.bak2
 *.bak3
 *.bak_poll
+*.bak_port
+*.bak_preloader
 *.backup
 *.orig
 
@@ -32,6 +37,12 @@ public/uploads/*
 .pm2/
 logs/
 *.log
+
+# === Временные файлы изображений ===
+*-trimmed.png
+*-inverted.png
+*-temp.png
+*-square.png
 
 # === ОС и редакторы ===
 .DS_Store

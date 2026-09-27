@@ -126,6 +126,26 @@
   }
 }
 </style>
+
+<!-- favicon-block-start -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VAMP SHMOT">
+<meta property="og:title" content="VAMP SHMOT — одежда от независимых дизайнеров">
+<meta property="og:description" content="Уникальные вещи, честные цены, доставка по всей стране.">
+<meta property="og:url" content="https://vampshmot.ru/">
+<meta property="og:image" content="https://vampshmot.ru/img/favicon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VAMP SHMOT">
+<meta name="twitter:description" content="Одежда от независимых дизайнеров.">
+<meta name="twitter:image" content="https://vampshmot.ru/img/favicon-512.png">
+<!-- favicon-block-end -->
 </head>
 <body>
 <div id="preloader"><div class="preloader-content"><span id="preloader-title"></span><span id="preloader-heart">❤️</span></div></div>
@@ -859,5 +879,139 @@
 
 
 
+<!-- vamp-preloader-start -->
+<style id="vamp-preloader-css">
+#vamp-preloader {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .6s ease, visibility .6s ease;
+    font-family: 'Courier New', monospace;
+}
+#vamp-preloader.vamp-preloader--hide {
+    opacity: 0; visibility: hidden; pointer-events: none;
+}
+#vamp-preloader .vp-text {
+    font-size: 24px;
+    color: #111;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+#vamp-preloader .vp-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 26px;
+    background: #111;
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: vp-blink 1s step-end infinite;
+}
+#vamp-preloader .vp-cursor.vp-cursor--off {
+    animation: none;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+#vamp-preloader .vp-heart {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+    vertical-align: middle;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity .35s ease, transform .5s cubic-bezier(.2,1.6,.4,1);
+}
+#vamp-preloader .vp-heart svg {
+    width: 100%; height: 100%;
+    display: block;
+    fill: #c8001f;
+    filter: drop-shadow(0 1px 2px rgba(200,0,31,.25));
+}
+#vamp-preloader .vp-heart.vp-heart--show {
+    opacity: 1;
+    transform: scale(1);
+    animation: vp-beat 1.1s ease-in-out infinite;
+}
+@keyframes vp-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+@keyframes vp-beat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.18); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+}
+@media (max-width: 640px) {
+    #vamp-preloader .vp-text { font-size: 16px; }
+    #vamp-preloader .vp-cursor { height: 18px; }
+    #vamp-preloader .vp-heart { width: 16px; height: 16px; margin-left: 6px; }
+}
+</style>
+<div id="vamp-preloader">
+    <div class="vp-text">
+        <span id="vp-typed"></span>
+        <span class="vp-cursor" id="vp-cursor"></span>
+        <span class="vp-heart" id="vp-heart" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+    </div>
+</div>
+<script id="vamp-preloader-js">
+(function(){
+    var FULL_TEXT = 'Hi, this is your favorite VAMP';
+    var TYPE_DELAY = 55;
+    var HOLD_AFTER_TYPE = 350;
+    var HOLD_BEFORE_HIDE = 700;
+    var MIN_SHOW = 800;
+
+    var start = Date.now();
+    var typed = document.getElementById('vp-typed');
+    var cursor = document.getElementById('vp-cursor');
+    var heart = document.getElementById('vp-heart');
+    var pre = document.getElementById('vamp-preloader');
+    if (!typed || !pre) return;
+
+    function hide() {
+        pre.classList.add('vamp-preloader--hide');
+        setTimeout(function(){ pre.remove(); }, 700);
+    }
+
+    function afterTyping() {
+        setTimeout(function(){
+            cursor.classList.add('vp-cursor--off');
+            setTimeout(function(){
+                heart.classList.add('vp-heart--show');
+                setTimeout(function(){
+                    var elapsed = Date.now() - start;
+                    var delay = Math.max(0, MIN_SHOW - elapsed);
+                    setTimeout(hide, delay + HOLD_BEFORE_HIDE);
+                }, 200);
+            }, 250);
+        }, HOLD_AFTER_TYPE);
+    }
+
+    var i = 0;
+    function type() {
+        if (i <= FULL_TEXT.length) {
+            typed.textContent = FULL_TEXT.slice(0, i);
+            i++;
+            setTimeout(type, TYPE_DELAY);
+        } else {
+            afterTyping();
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', type);
+    } else {
+        type();
+    }
+
+    setTimeout(hide, 8000);
+})();
+</script>
+<!-- vamp-preloader-end -->
 </body>
 </html>
